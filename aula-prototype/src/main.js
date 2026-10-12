@@ -1,5 +1,5 @@
-const User = require('./src/User')
-const Admin = require('./src/Admin')
+const User = require('./Utils/User')
+const Admin = require('./Utils/Admin')
 
 const admin_functions = new Admin()
 

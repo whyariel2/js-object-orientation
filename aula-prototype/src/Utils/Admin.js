@@ -5,14 +5,14 @@ function Admin() {
   this.createUser = function(name, email, phone, address, role) {
     const user = new User(name, email, phone, address, role)
 
-    console.log(`Usuário ${name} criado!`)
+    console.log(`User ${name} created!`)
 
     return user 
   }
   this.createClass = function(class_name) {
     const class_info = new Class(class_name, [])
 
-    console.log(`Classe ${class_name} criada!`)
+    console.log(`Class ${class_name} created!`)
 
     return class_info
   }
@@ -22,7 +22,7 @@ function Admin() {
 
     const class_students = classInfo.students.map(student => student.name)
 
-    console.log(`A turma agora é composta por: ${class_students}`)
+    console.log(`The class ${classInfo.class_name} is composed by: ${class_students}`)
 
   }
 }

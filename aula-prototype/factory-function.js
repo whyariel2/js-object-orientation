@@ -1,6 +1,6 @@
-const User = require('./src/User')
-const Admin = require('./src/Admin')
-const Student = require('./src/Student')
+const User = require('./src/Utils/User')
+const Admin = require('./src/Utils/Admin')
+const Student = require('./src/Utils/Student')
 
 function createUser(name, email, phone, address, role) {
   let user = new User(name, email, phone, address, role)

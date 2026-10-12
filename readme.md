@@ -44,7 +44,7 @@ Os métodos e propriedades não são copiados de um objeto para outro na cadeia 
 
 A forma que aprendemos anteriormente de herança de protótipo não é a forma usual de criar objetos em JS quando não temos classe. Normalmente utilizamos usando funções construtoras (`constructor`) e o operador `new`.
 
-Para construimos um constructor definimos uma função que pode ou não ter parâmetros. Agora precisamos definir como construir nosso objeto, ou seja, tudo o que for propriedade dele, utilizando o `this`. Vamos usar como exemplo o objeto [User](./src/User.js).
+Para construimos um constructor definimos uma função que pode ou não ter parâmetros. Agora precisamos definir como construir nosso objeto, ou seja, tudo o que for propriedade dele, utilizando o `this`. Vamos usar como exemplo o objeto [User](./aula-prototype/src/Utils/User.js).
 
 ``` js
 function User(name, email, phone, address, role) {
@@ -70,7 +70,7 @@ const admin = new User('Ari', 'a@a.com', 12123456789, 'rua 123', 'Admin')
 
 ### `Object.create`
 
-Assim como o `new` o `Object.create` serve para criar uma instância a partir de um construtor. Mas diferete do `new`, precisamos primeiro criar um objeto (`Object.create()`) e depois atribuir um valor (`variavel.init()`). Veja o exemplo a partir do exercício [object-create](./object-create.js):
+Assim como o `new` o `Object.create` serve para criar uma instância a partir de um construtor. Mas diferete do `new`, precisamos primeiro criar um objeto (`Object.create()`) e depois atribuir um valor (`variavel.init()`). Veja o exemplo a partir do exercício [object-create](./aula-prototype/object-create.js):
 
 ``` js
 const user = {
@@ -91,7 +91,7 @@ console.log(ari.exibirInfos())
 
 ### Factory Function
 
-Ela é nada mais nada mesmo do que uma função que retorna um objeto. Vamos usar como exemplo a função [createUser](./factory-function.js)
+Ela é nada mais nada mesmo do que uma função que retorna um objeto. Vamos usar como exemplo a função [createUser](./aula-prototype/factory-function.js)
 
 ``` js
 function createUser(name, email, phone, address, role) {
@@ -105,6 +105,87 @@ function createUser(name, email, phone, address, role) {
   return user
 }
 ```
+
+## Classes
+
+As classes são baseadas no protótipo e elas não existiam nas primeiras versões do JavaScript. Para criarmos uma classe utilizamos a palavra-chave `class` seguida do seu nome (sempre importante colocar a primeira letra do nome em maiúsculo).
+
+Dentro da nossa classe precisamos passar o nosso construtor utilizando `constructor(){}`, assim como nas nossas funções contrutoras precisamos declarar as nossas propriedades utilizando o `this` passando nosso parâmetro declarado entre parênteses. Vamos usar como exemplo a classe [User](./aula-class/src/Utils/User.js).
+
+```js
+class User {
+  constructor(name, email, phone, address, role) {
+    this.name = name
+    this.email = email
+    this.phone = phone
+    this.address = address
+    this.role = role || 'Student'
+  }
+
+  showInfo() {
+    return `Your name is: ${this.name}, your e-mail is ${this.email}`
+  }
+}
+```
+
+### Adicionando Métodos
+
+Um outro exemplo que podemos ver acima, é como declarar um método (comportamento) dentro da nossa classe. É bem simples, só colocar o nome da função seguida de `() {}`.
+
+### Instânciando uma Classe
+
+Como mencionado mais acima, para instânciarmos uma classe basta utilizar o `new` seguido do nome da classe e os seus parâmetros, se existir.
+
+```js
+const admin = new User('Ari', 'a@a.com', 12123456789, 'rua 123', 'Admin')
+```
+
+### Exportando e Importando Classes
+
+Para exportar classes existem duas formas, através do CommonJS ou ESModules. Não vou abordar a fundo nesse documento, mas você pode entender mais [nesse documento](https://github.com/whyariel2/node-dio#m%C3%B3dulos).
+
+Para o nosso exemplo vou utilizar o ESModules, vamos usar como exemplo a classe [User](./aula-class/src/Utils/User.js) novamente.
+
+__Exportar:__
+```js
+export default class User {
+  ...
+}
+```
+
+__Importar:__
+```js
+import User from './src/Utils/User.js'
+```
+
+### Herânça de Classe
+
+Para herdar propriedades de outra classe existente, precisamos importar a classe que desejamos herdar. 
+
+Depois utilizamos a palavra-chave `extends` seguido do nome da classe importada após o nome da classe que estamos criando. Nesse caso vamos utilizar o exemplo da classe [Admin](./aula-class/src/Utils/Admin.js)
+
+```js
+import User from './src/Utils/User.js'
+
+class Admin extends User{
+  ...
+}
+```
+
+No caso da classe `User`, temos as propriedades `name`, `email`, `phone`, `address`, `role` que queremos herdar para nossa classe `Admin`. Para isso, chamamos elas como parâmetro no `constructor` e utilizamos a função `super()` junto com os parâmetro queremos herdar de `User`.
+
+```js
+class Admin extends User{
+  constructor(name, email, phone, address, role = 'Admin') {
+    super(name, email, phone, address, role)
+  }
+  ...
+}
+```
+
+Utilizamos `role = 'Admin'` porque nesse caso nosso role por padrão vai ser sempre "Admin".
+
+Quando trabalhamos com orientação a objetos, muitas vezes utilizamos dois tipos de nomenclatura. Podemos falar tanto de classes __parent__ e __children__ (ou seja, classes pais e filhas), quanto de __superclasse__ e __subclasse__.
 
 ## Documentações
 
