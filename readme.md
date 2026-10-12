@@ -1,6 +1,6 @@
 # Programação Orientada a Objeto (POO | OOP)
 
-A programação a objeto é uma forma de organizar seu código de acordo com conceito de objetos. Ou seja, o nosso código é estruturado em torno de classes e objetos que representam endidades do mundo real.
+A programação a objeto é uma forma de organizar seu código de acordo com conceito de objetos. Ou seja, o nosso código é estruturado em torno de classes e objetos que representam entidades do mundo real.
 
 ## Objetos
 
@@ -173,16 +173,16 @@ function createUser(name, email, phone, address, role) {
 
 As classes são baseadas no protótipo e elas não existiam nas primeiras versões do JavaScript. Para criarmos uma classe utilizamos a palavra-chave `class` seguida do seu nome (sempre importante colocar a primeira letra do nome em maiúsculo).
 
-Dentro da nossa classe precisamos passar o nosso construtor utilizando `constructor(){}`, assim como nas nossas funções contrutoras precisamos declarar as nossas propriedades utilizando o `this` passando nosso parâmetro declarado entre parênteses. Vamos usar como exemplo a classe [User](./aula-class/src/Utils/User.js).
+Dentro da nossa classe precisamos passar o nosso construtor utilizando `constructor(){}`, assim como nas nossas funções contrutoras precisamos declarar as nossas propriedades, caso elas existam, utilizando o `this` passando nosso parâmetro declarado entre parênteses. Vamos usar como exemplo a classe [User](./aula-class/src/Utils/User.js).
 
 ```js
 class User {
-  constructor(name, email, phone, address, role) {
+  constructor(name, email, birth, role, active=true) {
     this.name = name
     this.email = email
-    this.phone = phone
-    this.address = address
+    this.birth = birth
     this.role = role || 'Student'
+    this.active = active
   }
 
   showInfo() {
@@ -200,7 +200,7 @@ Um outro exemplo que podemos ver acima, é como declarar um método (comportamen
 Como mencionado mais acima, para instânciarmos uma classe basta utilizar o `new` seguido do nome da classe e os seus parâmetros, se existir.
 
 ```js
-const admin = new User('Ari', 'a@a.com', 12123456789, 'rua 123', 'Admin')
+const admin = new User('Ari', 'a@a.com', '2003-01-25', 'Admin')
 ```
 
 ### Exportando e Importando Classes
@@ -235,12 +235,12 @@ class Admin extends User{
 }
 ```
 
-No caso da classe `User`, temos as propriedades `name`, `email`, `phone`, `address`, `role` que queremos herdar para nossa classe `Admin`. Para isso, chamamos elas como parâmetro no `constructor` e utilizamos a função `super()` junto com os parâmetro queremos herdar de `User`.
+No caso da classe `User`, temos as propriedades `name`, `email`, `birth`, `role`, `active` que queremos herdar para nossa classe `Admin`. Para isso, chamamos elas como parâmetro no `constructor` e utilizamos a função `super()` junto com os parâmetro queremos herdar de `User`.
 
 ```js
 class Admin extends User{
-  constructor(name, email, phone, address, role = 'Admin') {
-    super(name, email, phone, address, role)
+  constructor(name, email, birth, role = 'Admin', active = true) {
+    super(name, email, birth, role, active)
   }
   ...
 }
@@ -250,11 +250,17 @@ Utilizamos `role = 'Admin'` porque nesse caso nosso role por padrão vai ser sem
 
 Quando trabalhamos com orientação a objetos, muitas vezes utilizamos dois tipos de nomenclatura. Podemos falar tanto de classes __parent__ e __children__ (ou seja, classes pais e filhas), quanto de __superclasse__ e __subclasse__.
 
+#### Observações
+- O `constructor` e os métodos não são obrigatorios para termos uma classe, ou seja, podemos ter uma classe que tem um construtor mas não tem métodos ou vice-versa.
+- As classes não são _hoisted_, ou seja, não conseguimos instanciar uma classe antes de declará-la.
+- Toda classe em JavaScript segue implicitamente o que chamamos de modo estrito (_strict mode_). É como se tivesse no topo do arquivo um string escrito "_strict mode_". Isso serve para impedir que alguns comportamentos da linguagem causem “falhas silenciosas” (ou seja, falhas que não resultam em lançamento de erros pelo programa) e corrigir alguns outros que podem induzir bugs potenciais e comportamentos inesperados. [Leia mais aqui](#stricti-mode)
+
 ## Documentações
 
+- [POO: o que é programação orientada a objetos? | Alura Cursos Online](https://www.alura.com.br/artigos/poo-programacao-orientada-a-objetos)
 - [Object - JavaScript | MDN](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Object)
 - <a id='deprecated' >[Object.prototype.\_\_proto\_\_ - JavaScript | MDN](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Object/proto)</a>
-- [POO: o que é programação orientada a objetos? | Alura Cursos Online](https://www.alura.com.br/artigos/poo-programacao-orientada-a-objetos)
+- <a id='stricti-mode' >[Strict mode - JavaScript | MDN](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Strict_mode)</a>
 
 ## Material de Estudo
 

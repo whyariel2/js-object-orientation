@@ -20,7 +20,7 @@ function Admin() {
   this.addStudentToClass = function(student, classInfo) {
     classInfo.students.push(student)
 
-    const class_students = classInfo.students.map(student => student.name)
+    const class_students = classInfo.students.map(student => student.name).join(", ")
 
     console.log(`The class ${classInfo.class_name} is composed by: ${class_students}`)
 

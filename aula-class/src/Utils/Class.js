@@ -4,6 +4,12 @@ export default class Class {
     this.students = students
   }
   
+  showClassInfo() {
+    const class_students = this.students.map(student => student.name).join(", ")
+
+    return `The class ${this.class_name} is composed by: ${class_students}`
+  }
+
   listClassStudents() {
     return this.students
   }

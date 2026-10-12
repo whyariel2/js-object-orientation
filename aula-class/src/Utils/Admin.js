@@ -3,27 +3,23 @@ import Student from "./Student.js";
 import Class from "./Class.js";
 
 export default class Admin extends User{
-  constructor(name, email, phone, address, role = 'Admin') {
-    super(name, email, phone, address, role)
+  constructor(name, email, birth, role = 'Admin', active = true) {
+    super(name, email, birth, role, active)
   }
 
-  createUser(name, email, phone, address, role) {
-    const user = role === 'Admin' ? new Admin(name, email, phone, address, role) : new Student(name, email, phone, address)
+  createUser(name, email, birth, role) {
+    const user = role === 'Admin' ? new Admin(name, email, birth) : new Student(name, email, birth)
 
     return user 
   }
 
-  createClass(class_name) {
-    const class_info = new Class(class_name, [])
+  createClass(class_name, students) {
+    const class_info = new Class(class_name, students || Array())
 
     return class_info
   }
 
   addStudentToClass(student, classInfo) {
     classInfo.students.push(student)
-
-    const class_students = classInfo.students.map(student => student.name)
-
-    return `The class ${classInfo.class_name} is composed by: ${class_students}`
   }
 }

@@ -4,7 +4,8 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "start": "node ./src/main.js"
+    "start": "node ./src/main.js",
+    "start:draw-students": "node ./src/Utils/draw-students.js"
   },
   "keywords": [],
   "author": "",

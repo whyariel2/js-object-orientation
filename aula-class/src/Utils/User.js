@@ -1,10 +1,10 @@
 export default class User {
-  constructor(name, email, phone, address, role) {
+  constructor(name, email, birth, role, active=true) {
     this.name = name
     this.email = email
-    this.phone = phone
-    this.address = address
+    this.birth = birth
     this.role = role || 'Student'
+    this.active = active
   }
 
   showInfo() {
