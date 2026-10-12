@@ -1,4 +1,67 @@
+# Programação Orientada a Objeto (POO | OOP)
+
+A programação a objeto é uma forma de organizar seu código de acordo com conceito de objetos. Ou seja, o nosso código é estruturado em torno de classes e objetos que representam endidades do mundo real.
+
+## Objetos
+
+Os objetos são unidades que reúnem dados (atributos) e comportamentos (métodos).
+
+Vamos imaginar um usuário de um site qualquer, ele tem um nome, um e-mail e geralmente uma senha. Ele também pode conseguir ver suas informações, certo?
+
+O usuário é um objeto, seu nome, e-mail e senha são seus __atributos__ e seu __comportamento__ é ver suas informações. Vamos estruturar isso dentro do código.
+
+```js
+const user = {
+  name = 'Ari'
+  email = 'a@a.com'
+  password = '123abc'
+
+  ver_info = function() {
+    console.log(`Your name is ${this.name} and your e-mail is ${this.email}`)
+  }
+}
+```
+
+## `this`
+
+Usamos o `this` sempre que quisermos nos referir a uma propriedade do contexto que estamos inseridos. No exemplo acima o nosso contexto era o usuário, por isso conseguimos executar com sucesso a função `ver_info`.
+
+```js
+user.ver_info() 
+// Your name is Ari and your e-mail is $a@a.com
+```
+
 ## Protótipos
+
+Protótipos são objetos base que possuem propriedades e métodos reutilizáveis. A herança de protótipo permite que um objeto herde funcionalidades de outro objeto, compartilhando comportamento sem duplicar código.
+
+```js
+const user = {
+  name: 'Ari',
+  age: 23,
+  email: 'a@a.com',
+  role: 'user',
+  active: true,
+  showInfo: function() {
+    console.log(`Hi ${this.name}! your email is: ${this.email}. Your account is ${this.active ? 'active' : 'not active'}`)
+  }
+}
+
+const admin = {
+  name: 'Naná',
+  age: 21,
+  email: 'n@n.com',
+  role: 'admin',
+  createCourse: function() {
+    console.log('Course created! =)')
+  }
+}
+
+// variável admin herda propriedades da variável user
+Object.setPrototypeOf(admin, user);
+```
+
+Nesse exemplo `admin` herda a propriedade `active = true` e o métodos `showInfo` do objeto `user`
 
 ### \_\_proto\_\_ Vs prototype
 
@@ -191,6 +254,7 @@ Quando trabalhamos com orientação a objetos, muitas vezes utilizamos dois tipo
 
 - [Object - JavaScript | MDN](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Object)
 - <a id='deprecated' >[Object.prototype.\_\_proto\_\_ - JavaScript | MDN](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Object/proto)</a>
+- [POO: o que é programação orientada a objetos? | Alura Cursos Online](https://www.alura.com.br/artigos/poo-programacao-orientada-a-objetos)
 
 ## Material de Estudo
 
