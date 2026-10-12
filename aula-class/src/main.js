@@ -21,11 +21,9 @@ const student_1 = admin.createUser('Leleco', 'l@l.com', '2002-03-12')
 const student_2 = admin_2.createUser('Haru', 'h@h.com', '2006-06-20')
 
 showDivisor()
-console.log(student_1)
 console.log(student_1.showInfo())
 
 showDivisor()
-console.log(student_2)
 console.log(student_2.showInfo())
 
 admin.addStudentToClass(student_1, class_A)

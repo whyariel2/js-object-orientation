@@ -61,13 +61,13 @@ const admin = {
 Object.setPrototypeOf(admin, user);
 ```
 
-Nesse exemplo `admin` herda a propriedade `active = true` e o métodos `showInfo` do objeto `user`
+Nesse exemplo `admin` herda a propriedade `active = true` e o métodos `showInfo` do objeto `user`.
 
 ### \_\_proto\_\_ Vs prototype
 
 Em resumo:
 
-`__proto__` é uma propriedade que todos os objetos têm e que aponta para o protótipo que foi definido para aquele objeto
+`__proto__` é uma propriedade que todos os objetos têm e que aponta para o protótipo que foi definido para aquele objeto.
 
 `prototype` é uma propriedade da função que é definida como protótipo quando usamos new para criar novos objetos.
 
@@ -107,7 +107,7 @@ Os métodos e propriedades não são copiados de um objeto para outro na cadeia 
 
 A forma que aprendemos anteriormente de herança de protótipo não é a forma usual de criar objetos em JS quando não temos classe. Normalmente utilizamos usando funções construtoras (`constructor`) e o operador `new`.
 
-Para construimos um constructor definimos uma função que pode ou não ter parâmetros. Agora precisamos definir como construir nosso objeto, ou seja, tudo o que for propriedade dele, utilizando o `this`. Vamos usar como exemplo o objeto [User](./aula-prototype/src/Utils/User.js).
+Para construimos um constructor definimos uma função que pode ou não ter parâmetros. Agora precisamos definir como construir nosso objeto, ou seja, tudo o que for propriedade dele, utilizando o `this`. Vamos usar como exemplo o objeto [User](./aula-prototype/src/Utils/User.js):
 
 ``` js
 function User(name, email, phone, address, role) {
@@ -154,7 +154,7 @@ console.log(ari.exibirInfos())
 
 ### Factory Function
 
-Ela é nada mais nada mesmo do que uma função que retorna um objeto. Vamos usar como exemplo a função [createUser](./aula-prototype/factory-function.js)
+Ela é nada mais nada mesmo do que uma função que retorna um objeto. Vamos usar como exemplo a função [createUser](./aula-prototype/factory-function.js):
 
 ``` js
 function createUser(name, email, phone, address, role) {
@@ -173,7 +173,7 @@ function createUser(name, email, phone, address, role) {
 
 As classes são baseadas no protótipo e elas não existiam nas primeiras versões do JavaScript. Para criarmos uma classe utilizamos a palavra-chave `class` seguida do seu nome (sempre importante colocar a primeira letra do nome em maiúsculo).
 
-Dentro da nossa classe precisamos passar o nosso construtor utilizando `constructor(){}`, assim como nas nossas funções contrutoras precisamos declarar as nossas propriedades, caso elas existam, utilizando o `this` passando nosso parâmetro declarado entre parênteses. Vamos usar como exemplo a classe [User](./aula-class/src/Utils/User.js).
+Dentro da nossa classe precisamos passar o nosso construtor utilizando `constructor(){}`, assim como nas nossas funções contrutoras precisamos declarar as nossas propriedades, caso elas existam, utilizando o `this` passando nosso parâmetro declarado entre parênteses. Vamos usar como exemplo a classe [User](./aula-class/src/Utils/User.js):
 
 ```js
 class User {
@@ -225,7 +225,7 @@ import User from './src/Utils/User.js'
 
 Para herdar propriedades de outra classe existente, precisamos importar a classe que desejamos herdar. 
 
-Depois utilizamos a palavra-chave `extends` seguido do nome da classe importada após o nome da classe que estamos criando. Nesse caso vamos utilizar o exemplo da classe [Admin](./aula-class/src/Utils/Admin.js)
+Depois utilizamos a palavra-chave `extends` seguido do nome da classe importada após o nome da classe que estamos criando. Nesse caso vamos utilizar o exemplo da classe [Admin](./aula-class/src/Utils/Admin.js).
 
 ```js
 import User from './src/Utils/User.js'
@@ -255,6 +255,64 @@ Quando trabalhamos com orientação a objetos, muitas vezes utilizamos dois tipo
 - As classes não são _hoisted_, ou seja, não conseguimos instanciar uma classe antes de declará-la.
 - Toda classe em JavaScript segue implicitamente o que chamamos de modo estrito (_strict mode_). É como se tivesse no topo do arquivo um string escrito "_strict mode_". Isso serve para impedir que alguns comportamentos da linguagem causem “falhas silenciosas” (ou seja, falhas que não resultam em lançamento de erros pelo programa) e corrigir alguns outros que podem induzir bugs potenciais e comportamentos inesperados. [Leia mais aqui](#stricti-mode)
 
+## Encapsulamento
+
+O encapsulamento é o ato de definirmos atributos e/ou métodos como privados, ou seja, para ocultarmos e não conseguirmos acessar e/ou modificar fora da nossa instância.
+
+No JavaScript, geralmente implementamos encapsulamento usando duas ferramentas. Uma delas é através de __atributos privados__ e a outra através de __métodos acessores__.
+
+### Atributos Privados
+
+Indicamos que um atributo ou propriedade de uma classe é privada utilizando `#` qunado utilizamos o `this`. Precisamos também declarar o atributo fora do nosso `constructor`. Veja o exemplo abaixo com base no [User](./aula-encapsulation/src/Utils/User.js):
+
+```js
+class User {
+  #name
+  #email
+  #birth
+  #role
+  #active
+  constructor(name, email, birth, role, active=true) {
+    this.#name = name
+    this.#email = email
+    this.#birth = birth
+    this.#role = role || 'Student'
+    this.#active = active
+  }
+
+  showInfo() {
+    return `Your name is: ${this.#name}, your e-mail is ${this.#email}`
+  }
+}
+```
+#### Pontos Importantes
+- Caso tentarmos fazer um `console.log()` no atributo `name` de uma instância de `User`, o valor `undefined` é retornado pois não existe a propriedade name, e sim #name.
+- Caso tentarmos fazer um `console.log()` no atributo `#name` de uma instância de `User`, um erro é retornado pois `#name` é privado.
+- Mesma coisa para caso terntarmos atribuir um valor a propriedade.
+- O Node começou a implementar a sintaxe de `#` para campos privados na versão 12 e concluiu na versão 16. Portanto, se você estiver usando uma versão muito antiga, essa funcionalidade pode não estar disponível.
+
+### Métodos Privados
+
+Assim como o atributo, utilizamos `#` na frente do nosso método para definí-lo como privado. Vamos ver o exemplo da classe [Draw](./aula-encapsulation/src/Utils/Draw.js):
+
+```js
+class Draw {
+  ...
+  // private method
+  #findDrawNumber(draw_number, students) {
+    const find_number = students.find(student => student.draw_number == draw_number)
+
+    if( find_number == undefined) {
+      return false;
+    } else {
+      return true
+    }
+
+  }
+  ...
+}
+```
+
 ## Documentações
 
 - [POO: o que é programação orientada a objetos? | Alura Cursos Online](https://www.alura.com.br/artigos/poo-programacao-orientada-a-objetos)
@@ -265,3 +323,6 @@ Quando trabalhamos com orientação a objetos, muitas vezes utilizamos dois tipo
 ## Material de Estudo
 
 - [JavaScript: programação Orientada a Objetos | Alura](https://cursos.alura.com.br/course/javascript-programacao-orientada-objetos)
+- [Prática Protótipos](./aula-prototype/)
+- [Prática Classes](./aula-class/)
+- [Prática Encapsulamento](./aula-encapsulation/)
