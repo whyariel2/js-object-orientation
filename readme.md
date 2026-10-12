@@ -285,11 +285,6 @@ class User {
   }
 }
 ```
-#### Pontos Importantes
-- Caso tentarmos fazer um `console.log()` no atributo `name` de uma instância de `User`, o valor `undefined` é retornado pois não existe a propriedade name, e sim #name.
-- Caso tentarmos fazer um `console.log()` no atributo `#name` de uma instância de `User`, um erro é retornado pois `#name` é privado.
-- Mesma coisa para caso terntarmos atribuir um valor a propriedade.
-- O Node começou a implementar a sintaxe de `#` para campos privados na versão 12 e concluiu na versão 16. Portanto, se você estiver usando uma versão muito antiga, essa funcionalidade pode não estar disponível.
 
 ### Métodos Privados
 
@@ -311,6 +306,77 @@ class Draw {
   }
   ...
 }
+```
+
+#### Pontos Importantes
+- Caso tentarmos fazer um `console.log()` no atributo `name` de uma instância de `User`, o valor `undefined` é retornado pois não existe a propriedade name, e sim #name.
+- Caso tentarmos fazer um `console.log()` no atributo `#name` de uma instância de `User`, um erro é retornado pois `#name` é privado.
+- Mesma coisa para caso terntarmos atribuir um valor a propriedade.
+- O Node começou a implementar a sintaxe de `#` para campos privados na versão 12 e concluiu na versão 16. Portanto, se você estiver usando uma versão muito antiga, essa funcionalidade pode não estar disponível.
+
+Observamos que campos privados são eficazes em impedir que outras partes do código acessem propriedades e métodos que não deveriam. No entanto, eles são tão restritivos que nem mesmo subclasses, que teoricamente poderiam acessar esses campos privados, conseguem fazê-lo. Para resolver esse problema utilizamos algo chamamos de __métodos acessores__ (_getters_ e _setters_).
+
+
+### _Getters_
+
+Usamos a palavra-chave `get` antes de um método com o nome da nossa propriedade para que possamos apenas ler uma propriedade fora da nossa classe. Dentro do método retornamos a propriedade privada usando o `this`. Vamos ver o exemplo adionado em `User`:
+
+```js
+class User {
+  ...
+  get name(){
+    return this.#name
+  }
+  ...
+}
+```
+
+Os _getters_ são acessados como se fossem propriedades, não como função.
+
+```js
+const user = new User('Ari', 'a@a.com','2003-01-25')
+
+console.log(user.name)
+// Ari
+```
+
+### _Setters_
+
+Usamos a palavra-chave `set` antes de um método com o nome da nossa propriedade para que fora da nossa classe possamos atribuir um novo valor a propriedade. O _setter_ aceita somente um parâmetro, o novo valor a ser atribuido. Vamos ver o exemplo adionado em [Student](./aula-encapsulation/src/Utils/Student.js):
+
+```js
+class Student {
+  ...
+  set draw_number(new_draw_number) {
+    ...
+    this.#draw_number = new_draw_number
+  }
+}
+```
+
+Beleza, mas se eu defini uma propriedade como privada, pra que eu vou querer modificar ela? 
+
+No setter podemos implemetar lógica interna. Ou seja, podemos validar se o dado é válido, se a pessoa que está fazendo aquela alteração tem permissão para isso, autenticação, etc. Veja o exemplo:
+
+```js
+class Student {
+  ...
+  set draw_number(new_draw_number) {
+      if (new_draw_number === String(new_draw_number) || new_draw_number == undefined){
+        throw new Error('Number format is not valid')
+      }
+
+      this.#draw_number = new_draw_number
+  }
+}
+```
+
+O `setter` são definidos como propriedade usando o operador de `=`
+
+```js
+const student = new Student('Ari', 'a@a.com','2003-01-25')
+
+student.draw_number = 32
 ```
 
 ## Documentações

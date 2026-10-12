@@ -12,6 +12,10 @@ export default class User {
     this.#active = active
   }
 
+  get name(){
+    return this.#name
+  }
+
   showInfo() {
     return `Your name is: ${this.#name}, your e-mail is ${this.#email}`
   }

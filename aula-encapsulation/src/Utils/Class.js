@@ -5,12 +5,14 @@ export default class Class {
   }
   
   showClassInfo() {
+    //const class_students = this.students.map(student => student.#name).join(", ") // não funciona pois o #name é privado
+
     const class_students = this.students.map(student => student.name).join(", ")
 
     return `The class ${this.class_name} is composed by: ${class_students}`
   }
 
   listClassStudents() {
-    return this.students
+    return this.students.map(student => student.name).join(", ")
   }
 }
