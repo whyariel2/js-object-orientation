@@ -544,6 +544,7 @@ console.log(User.role)
 - [Object - JavaScript | MDN](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Object)
 - <a id='deprecated' >[Object.prototype.\_\_proto\_\_ - JavaScript | MDN](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Object/proto)</a>
 - <a id='strict-mode' >[Strict mode - JavaScript | MDN](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Strict_mode)</a>
+- [Arguments object - JavaScript | MDN](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Functions/arguments)
 - [Parâmetros Rest - JavaScript | MDN](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Functions/rest_parameters)
 - [Difference between Inheritance and Polymorphism - GeeksforGeeks](https://www.geeksforgeeks.org/cpp/difference-between-inheritance-and-polymorphism/)
 - [O que são as tipagens estática e dinâmica em programação | Alura Cursos Online](https://www.alura.com.br/artigos/o-que-sao-as-tipagens-estatica-e-dinamica-em-programacao)
