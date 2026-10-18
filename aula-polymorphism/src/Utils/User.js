@@ -27,11 +27,20 @@ export default class User {
   // }
 
   showInfo() {
-    if (this.role === 'Admin') {
-      return `Your name is: ${this.#name}, your e-mail is ${this.#email}, your birth is ${this.birth}`
+    // === Exemplo de polimorfismo sem argumentos ===
+    // if (this.role === 'Admin') {
+    //   return `Your name is: ${this.#name}, your e-mail is ${this.#email}, your birth is ${this.birth}`
+    // }
+
+    // return `Your name is: ${this.#name}, your e-mail is ${this.#email}`
+
+    // === Exemplo de polimorfismo com argumentos ===
+    const types = {
+      basic: `Your name is: ${this.#name}, your e-mail is ${this.#email}`,
+      complete: `Your name is: ${this.#name}, your e-mail is ${this.#email}, your birth is ${this.#birth}`
     }
 
-    return `Your name is: ${this.#name}, your e-mail is ${this.#email}`
+    return types[arguments[0]]
   }
 
   static showGenericInfo(name, email) {
