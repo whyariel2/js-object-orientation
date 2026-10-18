@@ -10,9 +10,9 @@ const user = {
 }
 
 const admin = {
-  name: 'Naná',
+  name: 'Leleco',
   age: 21,
-  email: 'n@n.com',
+  email: 'l@l.com',
   role: 'admin',
   createCourse: function() {
     console.log('Course created! =)')

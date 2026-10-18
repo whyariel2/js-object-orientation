@@ -1,6 +1,6 @@
-# Programação Orientada a Objeto (POO | OOP)
+# Programação Orientada a Objetos (POO | OOP)
 
-A programação a objeto é uma forma de organizar seu código de acordo com conceito de objetos. Ou seja, o nosso código é estruturado em torno de classes e objetos que representam entidades do mundo real.
+A programação orientada a objetos é uma forma de organizar seu código de acordo com o conceito de objetos. Ou seja, o nosso código é estruturado em torno de classes e objetos que representam entidades do mundo real.
 
 ## Objetos
 
@@ -24,11 +24,11 @@ const user = {
 
 ## `this`
 
-Usamos o `this` sempre que quisermos nos referir a uma propriedade do contexto que estamos inseridos. No exemplo acima o nosso contexto era o usuário, por isso conseguimos executar com sucesso a função `ver_info`.
+Usamos o `this` sempre que quisermos nos referir a uma propriedade do contexto em que estamos inseridos. No exemplo acima, o nosso contexto era o usuário, por isso conseguimos executar com sucesso a função `ver_info`.
 
 ```js
 user.ver_info() 
-// Your name is Ari and your e-mail is $a@a.com
+// Your name is Ari and your e-mail is a@a.com
 ```
 
 ## Protótipos
@@ -61,7 +61,7 @@ const admin = {
 Object.setPrototypeOf(admin, user);
 ```
 
-Nesse exemplo `admin` herda a propriedade `active = true` e o métodos `showInfo` do objeto `user`.
+Nesse exemplo, `admin` herda a propriedade `active = true` e o método `showInfo` do objeto `user`.
 
 ### \_\_proto\_\_ Vs prototype
 
@@ -79,7 +79,7 @@ Se tentarmos acessar as propriedades `prototype` e `__proto__` de estudante, obt
 
 ![__proto__ vs prototype](./docs/__proto__-vs-prototype.png)
 
-Você também pode ter notado que alguns objetos também possuem uma propriedade chamada `[[Prototype]]`. Vamos abordar sobre isso na próxima sessão.
+Você também pode ter notado que alguns objetos possuem uma propriedade chamada `[[Prototype]]`. Vamos abordar isso na próxima seção.
 
 ### Protótipo vs `prototype`
 
@@ -87,17 +87,17 @@ Praticamente todos os dados criados em JavaScript (objetos, arrays etc.) têm um
 
 Todos os objetos criados a partir de `Object`, `Array`, `String` etc. têm um protótipo que foi “herdado” destes, mas não necessariamente têm uma propriedade `prototype`.
 
-Na imagem abaixo podemos ver que estudante não tem a propriedade `prototype` porque ele não é a função que foi chamada com o `new`. Nesse caso que tem a propriedade `prototype` é o User, pois ele é a função que foi definida como protótipo nos nossos testes anteriores. Mas ambos tem um `[[Prototype]]` pois eles são criados a partir de um objeto.
+Na imagem abaixo, podemos ver que estudante não tem a propriedade `prototype` porque ele não é a função que foi chamada com o `new`. Nesse caso, quem tem a propriedade `prototype` é `User`, pois essa é a função que foi definida como protótipo nos nossos testes anteriores. Mas ambos têm um `[[Prototype]]`, pois são criados a partir de um objeto.
 
 ![Prototype vs prototype](./docs/Prototype-vs-prototype.png)
 
 ### Cópia vs referência
 
-Os métodos e propriedades não são copiados de um objeto para outro na cadeia de protótipos. Eles são acessados pelo interpretador ao percorrer a cadeia (herança) e os métodos executados de acordo com o this, ou seja, o contexto em que o método foi executado.
+Os métodos e as propriedades não são copiados de um objeto para outro na cadeia de protótipos. Eles são acessados pelo interpretador ao percorrer a cadeia (herança), e os métodos são executados de acordo com o `this`, ou seja, o contexto em que o método foi executado.
 
 #### Considerações finais
 
-- O uso do `__proto__` é apenas para exemplificar e acessar cadeias de protótipos. Ela foi descontinuada e pode ser removida dos padrões web e navegadores. ([Consulte a documentação](#deprecated))
+- O uso do `__proto__` é apenas para exemplificar e acessar cadeias de protótipos. Essa propriedade foi descontinuada e pode ser removida dos padrões web e navegadores. ([Consulte a documentação](#deprecated))
 
 - Não é recomendável alterar diretamente o prototype, pois alterar diretamente as regras de herança de qualquer objeto afeta a performance do código em qualquer interpretador, tanto no Node.js quanto em navegadores.
 
@@ -105,9 +105,9 @@ Os métodos e propriedades não são copiados de um objeto para outro na cadeia 
 
 ### Constructor
 
-A forma que aprendemos anteriormente de herança de protótipo não é a forma usual de criar objetos em JS quando não temos classe. Normalmente utilizamos usando funções construtoras (`constructor`) e o operador `new`.
+A forma que aprendemos anteriormente de herança de protótipo não é a forma usual de criar objetos em JS quando não temos classes. Normalmente, utilizamos funções construtoras (`constructor`) e o operador `new`.
 
-Para construimos um constructor definimos uma função que pode ou não ter parâmetros. Agora precisamos definir como construir nosso objeto, ou seja, tudo o que for propriedade dele, utilizando o `this`. Vamos usar como exemplo o objeto [User](./aula-prototype/src/Utils/User.js):
+Para construir um construtor, definimos uma função que pode ou não ter parâmetros. Agora precisamos definir como construir nosso objeto, ou seja, tudo o que for propriedade dele, utilizando o `this`. Vamos usar como exemplo o objeto [User](./aula-prototype/src/Utils/User.js):
 
 ``` js
 function User(name, email, phone, address, role) {
@@ -125,7 +125,7 @@ function User(name, email, phone, address, role) {
 
 ### Operador `new`
 
-O `new` serve para criamos uma nova instância do nosso objeto, ou seja, sempre que precisarmos criar um novo objeto de um construtor ou classe.
+O `new` serve para criar uma nova instância do nosso objeto, ou seja, sempre que precisarmos criar um novo objeto a partir de um construtor ou classe.
 
 ``` js
 const admin = new User('Ari', 'a@a.com', 12123456789, 'rua 123', 'Admin')
@@ -133,7 +133,7 @@ const admin = new User('Ari', 'a@a.com', 12123456789, 'rua 123', 'Admin')
 
 ### `Object.create`
 
-Assim como o `new` o `Object.create` serve para criar uma instância a partir de um construtor. Mas diferete do `new`, precisamos primeiro criar um objeto (`Object.create()`) e depois atribuir um valor (`variavel.init()`). Veja o exemplo a partir do exercício [object-create](./aula-prototype/object-create.js):
+Assim como o `new`, o `Object.create` serve para criar uma instância a partir de um objeto. Mas, diferente do `new`, precisamos primeiro criar um objeto (`Object.create()`) e depois atribuir valores chamando um método, como `variavel.init()`. Veja o exemplo a partir do exercício [object-create](./aula-prototype/object-create.js):
 
 ``` js
 const user = {
@@ -154,7 +154,7 @@ console.log(ari.exibirInfos())
 
 ### Factory Function
 
-Ela é nada mais nada mesmo do que uma função que retorna um objeto. Vamos usar como exemplo a função [createUser](./aula-prototype/factory-function.js):
+Ela nada mais é do que uma função que retorna um objeto. Vamos usar como exemplo a função [createUser](./aula-prototype/factory-function.js):
 
 ``` js
 function createUser(name, email, phone, address, role) {
@@ -173,7 +173,7 @@ function createUser(name, email, phone, address, role) {
 
 As classes são baseadas no protótipo e elas não existiam nas primeiras versões do JavaScript. Para criarmos uma classe utilizamos a palavra-chave `class` seguida do seu nome (sempre importante colocar a primeira letra do nome em maiúsculo).
 
-Dentro da nossa classe precisamos passar o nosso construtor utilizando `constructor(){}`, assim como nas nossas funções contrutoras precisamos declarar as nossas propriedades, caso elas existam, utilizando o `this` passando nosso parâmetro declarado entre parênteses. Vamos usar como exemplo a classe [User](./aula-class/src/Utils/User.js):
+Dentro da nossa classe, precisamos declarar o construtor utilizando `constructor(){}`. Assim como nas nossas funções construtoras, precisamos declarar as propriedades, caso existam, utilizando o `this` e os parâmetros definidos entre parênteses. Vamos usar como exemplo a classe [User](./aula-class/src/Utils/User.js):
 
 ```js
 class User {
@@ -195,9 +195,9 @@ class User {
 
 Um outro exemplo que podemos ver acima, é como declarar um método (comportamento) dentro da nossa classe. É bem simples, só colocar o nome da função seguida de `() {}`.
 
-### Instânciando uma Classe
+### Instanciando uma Classe
 
-Como mencionado mais acima, para instânciarmos uma classe basta utilizar o `new` seguido do nome da classe e os seus parâmetros, se existir.
+Como mencionado acima, para instanciarmos uma classe basta utilizar o `new` seguido do nome da classe e dos seus parâmetros, se existirem.
 
 ```js
 const admin = new User('Ari', 'a@a.com', '2003-01-25', 'Admin')
@@ -221,11 +221,11 @@ __Importar:__
 import User from './src/Utils/User.js'
 ```
 
-### Herânça de Classe
+### Herança de Classe
 
 Para herdar propriedades de outra classe existente, precisamos importar a classe que desejamos herdar. 
 
-Depois utilizamos a palavra-chave `extends` seguido do nome da classe importada após o nome da classe que estamos criando. Nesse caso vamos utilizar o exemplo da classe [Admin](./aula-class/src/Utils/Admin.js).
+Depois, utilizamos a palavra-chave `extends`, seguida do nome da classe importada, após o nome da classe que estamos criando. Nesse caso, vamos utilizar o exemplo da classe [Admin](./aula-class/src/Utils/Admin.js).
 
 ```js
 import User from './src/Utils/User.js'
@@ -235,7 +235,7 @@ class Admin extends User{
 }
 ```
 
-No caso da classe `User`, temos as propriedades `name`, `email`, `birth`, `role`, `active` que queremos herdar para nossa classe `Admin`. Para isso, chamamos elas como parâmetro no `constructor` e utilizamos a função `super()` junto com os parâmetro queremos herdar de `User`.
+No caso da classe `User`, temos as propriedades `name`, `email`, `birth`, `role` e `active`, que queremos herdar para nossa classe `Admin`. Para isso, passamos essas propriedades como parâmetros para o `constructor` e utilizamos a função `super()` com os parâmetros que queremos herdar de `User`.
 
 ```js
 class Admin extends User{
@@ -246,14 +246,14 @@ class Admin extends User{
 }
 ```
 
-Utilizamos `role = 'Admin'` porque nesse caso nosso role por padrão vai ser sempre "Admin".
+Utilizamos `role = 'Admin'` porque, nesse caso, o valor de `role` será sempre "Admin" por padrão.
 
 Quando trabalhamos com orientação a objetos, muitas vezes utilizamos dois tipos de nomenclatura. Podemos falar tanto de classes __parent__ e __children__ (ou seja, classes pais e filhas), quanto de __superclasse__ e __subclasse__.
 
 #### Observações
-- O `constructor` e os métodos não são obrigatorios para termos uma classe, ou seja, podemos ter uma classe que tem um construtor mas não tem métodos ou vice-versa.
+- O `constructor` e os métodos não são obrigatórios para termos uma classe, ou seja, podemos ter uma classe que tem um construtor, mas não tem métodos, ou vice-versa.
 - As classes não são _hoisted_, ou seja, não conseguimos instanciar uma classe antes de declará-la.
-- Toda classe em JavaScript segue implicitamente o que chamamos de modo estrito (_strict mode_). É como se tivesse no topo do arquivo um string escrito "_strict mode_". Isso serve para impedir que alguns comportamentos da linguagem causem “falhas silenciosas” (ou seja, falhas que não resultam em lançamento de erros pelo programa) e corrigir alguns outros que podem induzir bugs potenciais e comportamentos inesperados. [Leia mais aqui](#stricti-mode)
+- Toda classe em JavaScript segue implicitamente o que chamamos de modo estrito (_strict mode_). É como se houvesse, no topo do arquivo, uma string escrita "_strict mode_". Isso serve para impedir que alguns comportamentos da linguagem causem “falhas silenciosas” (ou seja, falhas que não resultam no lançamento de erros pelo programa) e corrigir outros que podem induzir bugs potenciais e comportamentos inesperados. [Leia mais aqui](#strict-mode)
 
 ## Encapsulamento
 
@@ -263,7 +263,7 @@ No JavaScript, geralmente implementamos encapsulamento usando duas ferramentas. 
 
 ### Atributos Privados
 
-Indicamos que um atributo ou propriedade de uma classe é privada utilizando `#` qunado utilizamos o `this`. Precisamos também declarar o atributo fora do nosso `constructor`. Veja o exemplo abaixo com base no [User](./aula-encapsulation/src/Utils/User.js):
+Indicamos que um atributo ou propriedade de uma classe é privada utilizando `#` com o `this`. Precisamos também declarar o atributo fora do nosso `constructor`. Veja o exemplo abaixo com base no [User](./aula-encapsulation/src/Utils/User.js):
 
 ```js
 class User {
@@ -288,7 +288,7 @@ class User {
 
 ### Métodos Privados
 
-Assim como o atributo, utilizamos `#` na frente do nosso método para definí-lo como privado. Vamos ver o exemplo da classe [Draw](./aula-encapsulation/src/Utils/Draw.js):
+Assim como no atributo, utilizamos `#` na frente do nome do método para defini-lo como privado. Vamos ver o exemplo da classe [Draw](./aula-encapsulation/src/Utils/Draw.js):
 
 ```js
 class Draw {
@@ -311,15 +311,15 @@ class Draw {
 #### Pontos Importantes
 - Caso tentarmos fazer um `console.log()` no atributo `name` de uma instância de `User`, o valor `undefined` é retornado pois não existe a propriedade name, e sim #name.
 - Caso tentarmos fazer um `console.log()` no atributo `#name` de uma instância de `User`, um erro é retornado pois `#name` é privado.
-- Mesma coisa para caso terntarmos atribuir um valor a propriedade.
+- O mesmo acontece se tentarmos atribuir um valor à propriedade.
 - O Node começou a implementar a sintaxe de `#` para campos privados na versão 12 e concluiu na versão 16. Portanto, se você estiver usando uma versão muito antiga, essa funcionalidade pode não estar disponível.
 
-Observamos que campos privados são eficazes em impedir que outras partes do código acessem propriedades e métodos que não deveriam. No entanto, eles são tão restritivos que nem mesmo subclasses, que teoricamente poderiam acessar esses campos privados, conseguem fazê-lo. Para resolver esse problema utilizamos algo chamamos de __métodos acessores__ (_getters_ e _setters_).
+Observamos que campos privados são eficazes em impedir que outras partes do código acessem propriedades e métodos que não deveriam. No entanto, eles são tão restritivos que nem mesmo subclasses, que teoricamente poderiam acessar esses campos privados, conseguem fazê-lo. Para resolver esse problema, utilizamos algo chamado de __métodos acessores__ (_getters_ e _setters_).
 
 
 ### _Getters_
 
-Usamos a palavra-chave `get` antes de um método com o nome da nossa propriedade para que possamos apenas ler uma propriedade fora da nossa classe. Dentro do método retornamos a propriedade privada usando o `this`. Vamos ver o exemplo adionado em `User`:
+Usamos a palavra-chave `get` antes de um método com o nome da nossa propriedade para que possamos apenas ler uma propriedade fora da nossa classe. Dentro do método, retornamos a propriedade privada usando o `this`. Vamos ver o exemplo adicionado em `User`:
 
 ```js
 class User {
@@ -331,7 +331,7 @@ class User {
 }
 ```
 
-Os _getters_ são acessados como se fossem propriedades, não como função.
+Os _getters_ são acessados como se fossem propriedades, não como funções.
 
 ```js
 const user = new User('Ari', 'a@a.com','2003-01-25')
@@ -342,7 +342,7 @@ console.log(user.name)
 
 ### _Setters_
 
-Usamos a palavra-chave `set` antes de um método com o nome da nossa propriedade para que fora da nossa classe possamos atribuir um novo valor a propriedade. O _setter_ aceita somente um parâmetro, o novo valor a ser atribuido. Vamos ver o exemplo adionado em [Student](./aula-encapsulation/src/Utils/Student.js):
+Usamos a palavra-chave `set` antes de um método com o nome da nossa propriedade para que possamos atribuir um novo valor à propriedade fora da nossa classe. O _setter_ aceita somente um parâmetro: o novo valor a ser atribuído. Vamos ver o exemplo adicionado em [Student](./aula-encapsulation/src/Utils/Student.js):
 
 ```js
 class Student {
@@ -356,7 +356,7 @@ class Student {
 
 Beleza, mas se eu defini uma propriedade como privada, pra que eu vou querer modificar ela? 
 
-No setter podemos implemetar lógica interna. Ou seja, podemos validar se o dado é válido, se a pessoa que está fazendo aquela alteração tem permissão para isso, autenticação, etc. Veja o exemplo:
+No _setter_, podemos implementar lógica interna. Ou seja, podemos validar se o dado é válido, se a pessoa que está fazendo aquela alteração tem permissão para isso, se há autenticação, etc. Veja o exemplo:
 
 ```js
 class Student {
@@ -371,7 +371,7 @@ class Student {
 }
 ```
 
-O `setter` são definidos como propriedade usando o operador de `=`
+Os _setters_ são definidos como propriedades e utilizados com o operador `=`.
 
 ```js
 const student = new Student('Ari', 'a@a.com','2003-01-25')
@@ -379,12 +379,106 @@ const student = new Student('Ari', 'a@a.com','2003-01-25')
 student.draw_number = 32
 ```
 
+## Polimorfismo
+
+Polimorfismo permite que objetos diferentes respondam à mesma chamada de método com comportamentos próprios.
+
+Vamos imaginar um usuário no contexto que utilizamos ao longo do nosso estudo. Ele pode ser um administrador ou um estudante, e cada tipo de usuário pode ter comportamentos específicos.
+
+Herança e polimorfismo estão relacionados, mas não são a mesma coisa. A herança permite que uma classe herde os atributos e métodos de outra. O polimorfismo aparece, por exemplo, quando chamamos o mesmo método em objetos diferentes e cada objeto executa a implementação do seu contexto.
+
+Uma forma de demonstrar isso é sobrescrever (_override_) na subclasse um método herdado.
+
+### _Override_
+
+_Override_ é sobrescrever, na subclasse, um método que já existe na classe pai. Considere a classe [User](./aula-polymorphism/src/Utils/User.js) e a subclasse [Admin](./aula-polymorphism/src/Utils/Admin.js). `User` define `showInfo()`, e `Admin` sobrescreve esse método para acrescentar a data de nascimento às informações exibidas:
+
+```js
+class Admin extends User{
+  showInfo() {
+    const infos = super.showInfo()
+
+    return `${infos}, your birth is ${this.birth}`
+  }
+}
+```
+Quando criamos uma instância de `Admin` e outra de `User`, podemos observar que o retorno do método `showInfo()` é diferente, conforme configuramos.
+
+```js
+const user = new User('Ari', 'a@a.com', '2003-01-25')
+const admin = new Admin('Leleco', 'l@l.com', '2001-05-10')
+
+console.log(user.showInfo())
+// Your name is: Ari, your e-mail is a@a.com
+console.log(admin.showInfo())
+//Your name is: Leleco, your e-mail is l@l.com, your birth is 2001-05-10
+```
+
+### Assinatura de Função
+
+Em algumas linguagens, como Java, podemos declarar vários métodos com o mesmo nome, mas com parâmetros diferentes. Isso é chamado de __sobrecarga de métodos__ (_overloading_) e utiliza a __assinatura da função__ para identificar qual implementação deve ser executada.
+
+No JavaScript, não existe essa seleção automática de métodos pela quantidade ou pelo tipo dos parâmetros. Se declararmos métodos com o mesmo nome dentro da classe, a última declaração é a que será utilizada. Como a linguagem permite que uma função receba argumentos de diferentes tipos, precisamos tratar esses casos dentro do próprio método.
+
+### Sobrecarga (_Overloading_)
+
+Podemos simular o _overloading_ usando uma estrutura condicional dentro do método. Vamos utilizar a classe [User](./aula-polymorphism/src/Utils/User.js) como exemplo:
+
+```js
+class User {
+  ...
+  showInfo() {
+    if (this.role === 'Admin') {
+      return `Your name is: ${this.#name}, your e-mail is ${this.#email}, your birth is ${this.birth}`
+    }
+
+    return `Your name is: ${this.#name}, your e-mail is ${this.#email}`
+  }
+  ...
+}
+```
+
+#### Pontos importantes
+
+- Essa abordagem pode ser útil em casos simples, mas muitas condicionais podem deixar a classe muito acoplada (concentra conhecimento e regras de várias situações diferentes). Nesses casos, podemos avaliar se faz mais sentido usar _override_ em subclasses, como no exemplo anterior.
+
+- O TypeScript oferece assinaturas de sobrecarga para verificar, durante a análise de tipos, as formas permitidas de chamar uma função. Porém, essas assinaturas não criam implementações diferentes em tempo de execução: o comportamento ainda precisa ser tratado por uma única implementação, por exemplo, com condicionais.
+
+### Métodos e Atributos Estáticos
+
+Os métodos e atributos estáticos não precisam que a classe seja instanciada para serem utilizados. Eles não precisam de um construtor para funcionar.
+
+Eles também podem ser chamados de métodos e atributos de classe justamente por não pertencerem a uma instância específica, e sim à própria classe.
+
+Geralmente, são utilizados para alguma simulação ou configuração relacionada àquela classe. Vamos ver um exemplo implementado em `User`.
+
+```js
+class User {
+  ...
+  static role = 'Admin'
+  ...
+  static showGenericInfo(name, email) {
+    return `Your name is: ${name}, your e-mail is ${email}, ${this.role}`
+  }
+}
+```
+
+O atributo e o método estáticos pertencem à classe `User`, não a uma instância específica. Por isso, acessamos seus valores e métodos usando o nome da classe:
+
+```js
+const generic_user = User.showGenericInfo('User', 'u@u.com')
+console.log(generic_user)
+// Your name is: User, your e-mail is u@u.com, Admin
+console.log(User.role)
+// Admin
+```
+
 ## Documentações
 
 - [POO: o que é programação orientada a objetos? | Alura Cursos Online](https://www.alura.com.br/artigos/poo-programacao-orientada-a-objetos)
 - [Object - JavaScript | MDN](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Object)
 - <a id='deprecated' >[Object.prototype.\_\_proto\_\_ - JavaScript | MDN](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Object/proto)</a>
-- <a id='stricti-mode' >[Strict mode - JavaScript | MDN](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Strict_mode)</a>
+- <a id='strict-mode' >[Strict mode - JavaScript | MDN](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Strict_mode)</a>
 
 ## Material de Estudo
 
